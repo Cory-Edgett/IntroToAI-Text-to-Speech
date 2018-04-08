@@ -10,36 +10,12 @@ import tensorflow as tf
 import pandas as pd
 import numpy as np
 import re
+from translator import wordsToPhonetics
 
-test = input("What can I say for you?\n")
+print ("What can I say for you?")
 
-cmu_dict = open('Dataset_v1/cmudict.dict', "r")
-
-# contain content for sentence given to phonetics
-wordsToPhonetic = {}
-
-# parse through text converting to arpabet
-seg_test = test.split(" ")
-
-# conv the dict into a string to regex over it
-dictString = cmu_dict.read()
-
-# For each word in the given sentence find its phonetic spelling
-for word in seg_test:
-
-    # word to regex
-    wordRex =  '\\n' + word.lower() + '\s(.*)'
-    p = re.compile(wordRex)
-    # search in dictionary
-    matchedObj = re.search(p, dictString)
-    
-    # add phonetic to dictionary, with word as key
-    wordsToPhonetic[word] = matchedObj.group(1)
-
-# print value
-print(wordsToPhonetic)
-    
-
-
-# close dictionary
-cmu_dict.close()
+while(1):
+    testIn = input(">>")
+    if testIn == "-1":
+        break
+    print(wordsToPhonetics(testIn))
