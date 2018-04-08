@@ -28,7 +28,7 @@ dictString = cmu_dict.read()
 for word in seg_test:
 
     # word to regex
-    wordRex =  '\\n' + word + '\s(.*)'
+    wordRex =  '\\n' + word.lower() + '\s(.*)'
     p = re.compile(wordRex)
     # search in dictionary
     matchedObj = re.search(p, dictString)
