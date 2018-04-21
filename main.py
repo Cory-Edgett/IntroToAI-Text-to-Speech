@@ -6,16 +6,25 @@ Created on Fri Apr  6 12:56:27 2018
 @author: sanzla_tv
 """
 
-#import tensorflow as tf
-#import pandas as pd
-#import numpy as np
-import re
 from translator import wordsToPhonetics
+from Speak import sayThis
 
+print("Say \"stop\" to exit")
 print ("What can I say for you?")
 
 while(1):
-    testIn = input(">>")
-    if testIn == "-1":
+    ans = input(">>")
+    if ans == "stop":
         break
-    print(wordsToPhonetics(testIn))
+    dict = wordsToPhonetics(ans)
+
+    combPhonetics = []
+    for word, phonetic in dict.items():
+        splitted = phonetic.split(" ")
+        for ph in splitted:
+            combPhonetics.append(ph)
+
+        combPhonetics.append("SPC")
+
+    sayThis(combPhonetics)
+
